@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4428828-499b-476a-b276-6ba6e81e823e" name="Changes" comment="laptop test">
+    <list default="true" id="a4428828-499b-476a-b276-6ba6e81e823e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/Star-Galaxy Classification.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Star-Galaxy Classification.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sdss_processed_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/sdss_processed_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/.ipynb_checkpoints/EDA-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/.ipynb_checkpoints/EDA-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/EDA.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/EDA.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/model_selection.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/model_selection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/train_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visualisation/plots.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualisation/plots.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,23 +29,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;PeterAshby&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/PeterAshby/star-galaxy-classifier&quot;,
-    &quot;accountId&quot;: &quot;b0f1c9ca-330d-4080-96ff-5cc3c08e2792&quot;
-  }
-}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2wVm84U9VzDcN7YlLl0PgRnmrmt" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -54,14 +42,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.model_selection.executor": "Run",
     "Python.plots.executor": "Run",
     "Python.run_sdss_query.executor": "Run",
+    "Python.run_training.executor": "Run",
     "Python.sdss_query.executor": "Run",
     "Python.train_model.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -73,7 +61,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
+        <option value="bundled-python-sdk-14705d77f0bb-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.25659.43" />
       </set>
     </attachedChunks>
   </component>
@@ -86,19 +74,6 @@
       <option name="presentableId" value="Default" />
       <updated>1746134952680</updated>
     </task>
-    <task id="LOCAL-00001" summary="laptop test">
-      <option name="closed" value="true" />
-      <created>1746224686357</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1746224686357</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="laptop test" />
-    <option name="LAST_COMMIT_MESSAGE" value="laptop test" />
   </component>
 </project>
