@@ -2,16 +2,15 @@ import streamlit as st
 import pickle
 import pandas as pd
 from pathlib import Path
+
+from sklearn.metrics import f1_score, accuracy_score
+from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import LabelEncoder
+
 from scripts.run_inference import run_inference
 from src.data.preprocessing import process_sdss_data
 from src.data.sdss_query import get_sdss_data
 import matplotlib.pyplot as plt
-
-def highlight_correct_wrong(row):
-    if row['Actual Class'] == row['Prediction']:
-        return ['background-color: #a3f7b5; color: black'] * len(row)  # green
-    else:
-        return ['background-color: #f7a3a3; color: black'] * len(row)  # red
 
 # Load available models
 MODEL_DIR = Path("models")
@@ -58,29 +57,21 @@ if st.button('Run Inference'):
     results = results.rename(columns={'class': 'Actual Class'})
     # Create a simplified view for comparison: prediction vs actual
     comparison = results[['Actual Class', 'Prediction']]
-    # Display the first 20 rows of the comparison
-    st.dataframe(
-        comparison.head(200).style.apply(highlight_correct_wrong, axis=1),
-        use_container_width=True
-    )
     # Allow the user to download the predictions
     st.download_button('Download full observation data', results.to_csv(index=False), 'predictions.csv')
 
     # Count correct vs incorrect predictions
     correct = (comparison['Actual Class'] == comparison['Prediction']).sum()
     incorrect = len(comparison) - correct
-
-    # Create pie chart
     fig, ax = plt.subplots()
     ax.pie(
         [correct, incorrect],
         labels=[f'{correct} Correct', f'{incorrect} Incorrect'],
-        colors=['#a3f7b5', '#f7a3a3'],  # green and red
+        colors=['#a3f7b5', '#f7a3a3'],
         autopct='%1.1f%%',
         startangle=90
     )
-    ax.axis('equal')  # Equal aspect ratio makes the pie round
-
+    ax.axis('equal')
     st.pyplot(fig)
 
     # Calculate metrics
@@ -89,25 +80,54 @@ if st.button('Run Inference'):
     incorrect = total - correct
     accuracy = correct / total * 100
 
-    # Display metrics side by side
     col1, col2, col3 = st.columns(3)
     col1.metric("Total Predictions", total)
     col2.metric("Correct", correct)
-    col3.metric("Accuracy", f"{accuracy:.2f}%")
+    col3.metric("Accuracy", f"{accuracy:.1f}%")
 
+    st.subheader('Model Insights: Evaluation Metrics')
+    # F1 Score
+    try:
+        f1 = f1_score(comparison['Actual Class'], comparison['Prediction'], pos_label='Star')
+        st.write(f"F1 Score (Star = Positive): {f1:.2f}")
+    except Exception as e:
+        st.warning(f"Could not compute F1 Score: {e}")
+    # Accuracy
+    accuracy = accuracy_score(comparison['Actual Class'], comparison['Prediction'])
+    st.write(f"Accuracy: {accuracy:.2%}")
+    # Cross-Val
+    try:
+        label_data = data['class']
+        if label_data.dtype == 'object':
+            label_data = LabelEncoder().fit_transform(label_data)
+        cv_score = cross_val_score(model, data.drop(columns=['class']), label_data, cv=5)
+        st.write(f"Cross-Validation Accuracy: {cv_score.mean():.2f} ± {cv_score.std():.4f}")
+    except Exception as e:
+        st.warning(f"Cross-validation failed: {e}")
+
+    st.subheader("Model Insights: Prediction Breakdown for a Random Sample")
     # Show explanation for a random sample prediction
     random_sample = results.sample(1)  # Random row from results
     sample_features = random_sample.drop(columns=['Actual Class', 'Prediction'])
-    explanation = model.predict_proba(sample_features)[0]  # Get probability of class predictions
-
-    st.subheader("Model Insights: Prediction Breakdown for a Random Sample")
     st.write("Random Sample Features:")
     st.dataframe(sample_features)
-    st.write(f"Prediction Probabilities:\nStar: {explanation[1] * 100:.2f}% | Galaxy: {explanation[0] * 100:.2f}%")
+    try:
+        if hasattr(model, "predict_proba"):
+            explanation = model.predict_proba(sample_features)[0]
+            st.write(
+                f"Prediction Probabilities:\nStar: {explanation[1] * 100:.2f}% | Galaxy: {explanation[0] * 100:.2f}%")
+        elif hasattr(model, "decision_function"):
+            decision = model.decision_function(sample_features)[0]
+            st.write(f"Decision Score: {decision:.4f} (positive means Star)")
+        else:
+            st.write("This model does not support probability or decision explanations.")
+    except Exception as e:
+        st.warning(f"Could not extract prediction explanation: {e}")
+
     st.write(f"Predicted Class: {random_sample['Prediction'].values[0]}")
 
 # Manual input
-st.subheader('Or input your own sky survey data! :)')
+st.subheader("Or input your own sky survey data and see if you're looking at a star or a galaxy! :)")
 with st.form('manual_input_form'):
     input_data = {}
     for col in [
