@@ -1,12 +1,10 @@
 import pandas as pd
 from pathlib import Path
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
-from xgboost import XGBClassifier
 from src.models.model_selection import evaluate_model
 from src.models.train_model import train_model
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
+import joblib
+
 
 def run_training(models):
     data_path = Path(__file__).resolve().parents[1] / "data" / "sdss_processed_data.csv"
@@ -27,12 +25,12 @@ def run_training(models):
     for abbrv, metric in results.items():
         print(f"\n{abbrv} - Score: {results[abbrv]['mean_score']:.2f} ± {results[abbrv]['std_score']:.4f} | F1 Score: {results[abbrv]['f1_score']:.2f}")
 
-models  = {
-    'LR': LogisticRegression(),
-    'RF': RandomForestClassifier(),
-    'XGB': XGBClassifier(),
-    'SVM': SVC()
-}
-
 if __name__ == '__main__':
+    models_dir = Path(__file__).resolve().parents[1] / "models"
+    models = {
+        'LR-best': joblib.load(models_dir / 'LR_best_model.pkl'),
+        'RF-best': joblib.load(models_dir / 'RF_best_model.pkl'),
+        'XGB-best': joblib.load(models_dir / 'XGB_best_model.pkl'),
+        'SVM-best': joblib.load(models_dir / 'SVM_best_model.pkl')
+    }
     run_training(models)

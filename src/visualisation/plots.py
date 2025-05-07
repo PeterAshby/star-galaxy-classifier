@@ -96,10 +96,3 @@ def plot_confusion_matrix(y_true, y_pred, ax=None, title='', labels=['Star', 'Ga
     ax.set_ylabel('True Label')
     save_path = os.path.abspath(os.path.join(__file__, '..', '..', '..', 'data', 'visualisations', f'{title}.png'))
     plt.savefig(save_path)
-
-r'''data_path = r'C:\Users\Peter\Jupyter Projects\Star-Galaxy Classification\data\sdss_processed_data.csv'
-df = pd.read_csv(data_path)
-figurepath1 = r'C:\Users\Peter\Jupyter Projects\Star-Galaxy Classification\data\visualisations\eda.png'
-figurepath2 = r'C:\Users\Peter\Jupyter Projects\Star-Galaxy Classification\data\visualisations\eda2.png'
-eda(df, figurepath1)
-eda2(df, figurepath2)'''
