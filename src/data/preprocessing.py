@@ -22,5 +22,6 @@ def process_sdss_data(df):
 
     type_map = {3: 'Galaxy', 6: 'Star'}
     df['class'] = df['type'].map(type_map)
+    df = df.drop(columns=['objid', 'ra', 'dec', 'type', 'rn'], errors='ignore')
 
     return df

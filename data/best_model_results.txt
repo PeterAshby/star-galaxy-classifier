@@ -1,0 +1,16 @@
+LR:
+Best Score: 0.9404
+Best Params: {'model__C': 100, 'model__max_iter': 100, 'model__penalty': 'l2', 'model__solver': 'lbfgs'}
+
+RF:
+Best Score: 0.9444
+Best Params: {'model__bootstrap': True, 'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__min_samples_split': 5, 'model__n_estimators': 100}
+
+XGB:
+Best Score: 0.9467
+Best Params: {'model__colsample_bytree': 1, 'model__gamma': 0, 'model__learning_rate': 0.1, 'model__max_depth': 6, 'model__n_estimators': 100, 'model__subsample': 0.8}
+
+SVM:
+Best Score: 0.9444
+Best Params: {'model__C': 10, 'model__gamma': 'scale', 'model__kernel': 'rbf'}
+
