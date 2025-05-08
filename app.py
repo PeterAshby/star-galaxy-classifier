@@ -26,7 +26,23 @@ def load_model(path):
     with open(path, 'rb') as f:
         return pickle.load(f)
 
-st.title("🌌 Star-Galaxy Classifier 🌌")
+st.markdown("""
+# 🌌 Star/Galaxy Classifier 🌌
+
+Welcome to the **Star-Galaxy Classifier**! This app uses machine learning models to classify objects in the sky as either **stars** or **galaxies** based on real SDSS survey measurements!
+
+### How to Use:
+1. **Choose a Model**: Select one of the pre-trained models (Logistic Regression, Random Forest, XGBoost, or SVM) in the sidebar.
+2. **Fetch Data**: Use the slider to set the number of SDSS samples to retrieve. Click **'Run Inference'** to retrieve and classify the data.
+3. **View Results**: After running the inference, you will see:
+    - **Model Evaluation**: Accuracy, F1 Score, and Cross-Validation details.
+    - **Prediction Breakdown**: A random sample will be shown with its features and prediction probability.
+    - **Download Results**: Download the results (with all features, prediction, and true class) as a CSV file.
+4. **Manual Input**: You can also manually input your own sky survey data to classify individual samples as stars or galaxies.
+
+For more details, explore the insights and predictions provided for the data!
+
+""")
 
 # Sidebar
 model_name = st.sidebar.selectbox('Choose a model', list(model_files.keys()))
